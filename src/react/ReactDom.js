@@ -1,23 +1,32 @@
-import {TEXT} from "./const";
+import { TEXT } from './const';
+
+/**
+ * ！术语
+ * vnode 虚拟dom节点
+ * node 真实dom节点
+ *
+ */
 
 function render(vnode, container) {
-  console.log("vnode", vnode); //sy-log
+  console.log('vnode', vnode); //sy-log
 
-  // vnode->node
+  // vnode->node, 把node装入container
   const node = createNode(vnode, container);
   container.appendChild(node);
 }
 
-// vnode->node
-// 生成node节点
+/**
+ * vnode->node
+ * 生成node节点
+ */
 function createNode(vnode, parentNode) {
-  const {type, props} = vnode;
+  const { type, props } = vnode;
   let node = null;
   if (type === TEXT) {
-    node = document.createTextNode("");
-  } else if (typeof type === "string") {
+    node = document.createTextNode('');
+  } else if (typeof type === 'string') {
     node = document.createElement(type);
-  } else if (typeof type === "function") {
+  } else if (typeof type === 'function') {
     // function class
     node = type.prototype.isReactComponent
       ? updateClassComponent(vnode, parentNode)
@@ -46,9 +55,9 @@ function reconcileChildren(children, node) {
 
 function updateNode(node, nextVal) {
   Object.keys(nextVal)
-    .filter(k => k !== "children")
-    .forEach(k => {
-      if (k.slice(0, 2) === "on") {
+    .filter((k) => k !== 'children')
+    .forEach((k) => {
+      if (k.slice(0, 2) === 'on') {
         // 简单处理 on开头当做事件
         let eventName = k.slice(2).toLowerCase();
         node.addEventListener(eventName, nextVal[k]);
@@ -59,14 +68,14 @@ function updateNode(node, nextVal) {
 }
 
 function updateFunctionComponent(vnode, parentNode) {
-  const {type, props} = vnode;
+  const { type, props } = vnode;
   const vvnode = type(props);
   const node = createNode(vvnode, parentNode);
   return node;
 }
 
 function updateClassComponent(vnode, parentNode) {
-  const {type, props} = vnode;
+  const { type, props } = vnode;
   const cmp = new type(props);
   const vvnode = cmp.render();
   const node = createNode(vvnode, parentNode);
@@ -74,5 +83,5 @@ function updateClassComponent(vnode, parentNode) {
 }
 
 export default {
-  render
+  render,
 };

@@ -1,23 +1,23 @@
 // import React, {Component, Fragment} from "react";
 // import ReactDOM from "react-dom";
 
-import React from './Jreact/'
-import ReactDOM from './Jreact/react-dom'
-import Component from './Jreact/Component'
+import React from './react/React';
+import ReactDOM from './react/ReactDom';
+import Component from './react/Component';
 
-import './index.css'
+import './index.css';
 
 class ClassComponent extends Component {
   static defaultProps = {
     color: 'pink',
-  }
+  };
   render() {
     return (
       <div className='border'>
         <div className={this.props.color}>color </div>
         {this.props.name}
       </div>
-    )
+    );
   }
 }
 
@@ -27,7 +27,7 @@ function FunctionComponent({ name }) {
       {name}
       <button onClick={() => console.log('omg')}>btn</button>
     </div>
-  )
+  );
 }
 
 const jsx = (
@@ -49,24 +49,23 @@ const jsx = (
       </div>
     ))}
   </div>
-)
+);
 
 // <React.Fragment key={item}>
 //   {item}
 //   <h6>文本{item}</h6>
 // </React.Fragment>
 
-// vnode->node , 把node装入container
-ReactDOM.render(jsx, document.getElementById('root'))
+ReactDOM.render(jsx, document.getElementById('root'));
 
-console.log('version', React.version) //sy-log
+console.log('version', React.version); //sy-log
 
-// vnode  虚拟dom节点
-// node 真实dom节点
-// !节点类型
-// 文本节点
-// HTML标签节点
-// function组件
-// class组件
-// fragment
-// 数组
+/**
+ * !节点类型
+ * 文本节点
+ * HTML标签节点
+ * function组件
+ * class组件
+ * fragment
+ * 数组
+ */
