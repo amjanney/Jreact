@@ -5,7 +5,7 @@ import React from './react/React';
 import ReactDOM from './react/ReactDom';
 import Component from './react/Component';
 
-import './index.css';
+// import './index.css';
 
 class ClassComponent extends Component {
   static defaultProps = {
